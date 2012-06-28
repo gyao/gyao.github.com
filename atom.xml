@@ -4,7 +4,7 @@
   <title><![CDATA[gyao's bloging]]></title>
   <link href="http://gyao.github.com/atom.xml" rel="self"/>
   <link href="http://gyao.github.com/"/>
-  <updated>2012-06-28T16:21:42+08:00</updated>
+  <updated>2012-06-28T18:25:41+08:00</updated>
   <id>http://gyao.github.com/</id>
   <author>
     <name><![CDATA[gyao]]></name>
@@ -12,6 +12,172 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 101]]></title>
+    <link href="http://gyao.github.com/blog/2012/06/28/octopress-101/"/>
+    <updated>2012-06-28T17:21:00+08:00</updated>
+    <id>http://gyao.github.com/blog/2012/06/28/octopress-101</id>
+    <content type="html"><![CDATA[<p>酝酿了一段时间“感情”，终于有了要写东西的冲动，花了点时间用<a href="http://octopress.org/">octopress</a>搭建了自己的博客，此文是为记录。</p>
+
+<h2>选择</h2>
+
+<p>Q：为什么要用octopress？</p>
+
+<p>A：理由很多，列出几个吸引我的：</p>
+
+<ul>
+<li>“像黑客一样写博客”：真伪geek读到此处就失去了免疫力</li>
+<li>用markdown写作</li>
+<li>用github对文章内容进行版本管理，也方便多人合作写作</li>
+<li>可发布到github pages上，免去自己搭建vps或选择博客服务提供商的麻烦</li>
+<li>内置代码高亮，各类真伪程序员的福音</li>
+<li>可定制程度较Jekll强</li>
+</ul>
+
+
+<h2>安装</h2>
+
+<h3>准备</h3>
+
+<h3>安装octopress</h3>
+
+<h3>配置github</h3>
+
+<h3>将source加入git</h3>
+
+<h3>更新octopress</h3>
+
+<h2>设置</h2>
+
+<h2>发布</h2>
+
+<p>1）使用命令产生新文章</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s2">&quot;Post Title&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2）预览</p>
+
+<p>3）发布</p>
+
+<h2>主题</h2>
+
+<p>1） <a href="https://github.com/imathis/octopress/wiki/List-Of-Octopress-Themes">找到喜欢的octopress主题</a></p>
+
+<p>2） 将主题克隆到本地.themes目录中：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone GIT_URL .themes/THEME_NAME
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3） 安装主题</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake install<span class="o">[</span><span class="s1">&#39;THEME_NAME&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4） 让主题生效</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>中文问题</h2>
+
+<p>老生常谈的问题，如果代码块，或代码块之前有utf-8字符（如中文），则执行rake generate时会发生错误。<a href="https://github.com/imathis/octopress/issues/232">Octopass issue 232</a>给出解决方法如下：</p>
+
+<ol>
+<li>确保post的文件格式为utf-8</li>
+<li>修改/path/to/gems/jekll-0.11.2/lib/jekll/convertible.rb，将第29行</li>
+</ol>
+
+
+<figure class='code'><figcaption><span>convertible.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">name</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>改为：</p>
+
+<figure class='code'><figcaption><span>convertible.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">name</span><span class="p">),</span> <span class="ss">:encoding</span> <span class="o">=&gt;</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>添加边栏</h2>
+
+<h3>添加Flickr边栏</h3>
+
+<p>1） 在/source/_includes/custom/asides/ 目录下添加flickr.html文件</p>
+
+<figure class='code'><figcaption><span>flickr.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">site</span><span class="p">.</span><span class="nx">flickr_user</span> <span class="o">%</span><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">section</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;flickr&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">My</span> <span class="nx">Flickr</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span><span class='line'><span class="c">&lt;!--</span> <span class="nx">Start</span> <span class="nx">of</span> <span class="nx">Flickr</span> <span class="nx">Badge</span> <span class="o">--&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">style</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">Images are wrapped in divs classed &quot;flickr_badge_image&quot; with ids &quot;flickr_badge_imageX&quot; where &quot;X&quot; is an integer specifying ordinal position. Below are some styles to get you started!</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="err">#</span><span class="nx">flickr_badge_wrapper</span> <span class="p">{</span><span class="nx">padding</span><span class="o">:</span><span class="mi">10</span><span class="nx">px</span> <span class="mi">0</span> <span class="mi">10</span><span class="nx">px</span> <span class="mi">0</span><span class="p">;}</span>
+</span><span class='line'><span class="p">.</span><span class="nx">flickr_badge_image</span> <span class="p">{</span><span class="nx">margin</span><span class="o">:</span> <span class="mi">0</span> <span class="mi">9</span><span class="nx">px</span> <span class="mi">8</span><span class="nx">px</span> <span class="mi">0</span><span class="nx">px</span><span class="p">;</span><span class="nx">display</span><span class="o">:</span> <span class="nx">inline</span><span class="o">-</span><span class="nx">block</span><span class="p">;}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/style&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;flickr_badge_uber_wrapper&quot;</span><span class="o">&gt;&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;flickr_badge_wrapper&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://www.flickr.com/badge_code_v2.gne?count=&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/div&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="c">&lt;!--</span> <span class="nx">End</span> <span class="nx">of</span> <span class="nx">Flickr</span> <span class="nx">Badge</span> <span class="o">--&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/section&gt;</span>
+</span><span class='line'><span class="p">{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2） 在_config.yml中添加：</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Flick Badges</span>
+</span><span class='line'><span class="c1"># Find your user id here: http://idgettr.com/ It should be something like &quot;25711589%40N00&quot;.</span>
+</span><span class='line'><span class="l-Scalar-Plain">flickr_user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">&lt;your_flickr_user_id&gt;</span>
+</span><span class='line'><span class="l-Scalar-Plain">flickr_count</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">6</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3） 在_config.yml的default_asides中添加custom/asides/flickr.html</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Setup rails environment on Mac Lion]]></title>
+    <link href="http://gyao.github.com/blog/2012/06/28/setup-rails-environment-on-mac-lion/"/>
+    <updated>2012-06-28T16:25:00+08:00</updated>
+    <id>http://gyao.github.com/blog/2012/06/28/setup-rails-environment-on-mac-lion</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Octopass]]></title>
