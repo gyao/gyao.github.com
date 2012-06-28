@@ -4,7 +4,7 @@
   <title><![CDATA[gyao's bloging]]></title>
   <link href="http://gyao.github.com/atom.xml" rel="self"/>
   <link href="http://gyao.github.com/"/>
-  <updated>2012-06-28T16:14:03+08:00</updated>
+  <updated>2012-06-28T16:21:42+08:00</updated>
   <id>http://gyao.github.com/</id>
   <author>
     <name><![CDATA[gyao]]></name>
@@ -18,7 +18,17 @@
     <link href="http://gyao.github.com/blog/2012/06/28/hello-octopass/"/>
     <updated>2012-06-28T15:59:00+08:00</updated>
     <id>http://gyao.github.com/blog/2012/06/28/hello-octopass</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>My first blog using Octopass, following are some tests:</p>
+
+<ol>
+<li>Code Highlighting</li>
+</ol>
+
+
+<figure class='code'><figcaption><span>Hello World.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hello World&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
