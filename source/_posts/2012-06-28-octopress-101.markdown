@@ -1,0 +1,248 @@
+---
+layout: post
+title: "Octopress 101"
+date: 2012-06-28 17:21
+comments: true
+categories: octopress
+---
+
+酝酿了一段时间感情，终于有了要写东西的冲动，花了点时间用[octopress][1]搭建了自己的博客，此文是为记录。
+
+[1]:http://octopress.org/
+
+Octopress前世
+---
+
+> Octopress is a framework designed by Brandon Mathis for [Jekyll][2], the blog aware static site generator powering Github Pages.
+
+[2]:https://github.com/mojombo/jekyll
+
+
+选择
+----
+
+Q：为什么要用octopress？
+
+A：理由很多，列出几个吸引我的：
+
+* “像黑客一样写博客”：真伪geek读到此处就失去了免疫力
+* 支持markdown语法
+* 静态方式发布，可发布到[github pages][3]上，免去自己搭建vps或选择博客服务提供商的麻烦
+* 内置代码高亮，各类真伪程序员的福音
+* 可定制程度较Jekyll强
+
+[3]:pages.github.com
+
+<!--more-->
+
+安装
+----
+
+### 准备
+
+1） github账户，并创建your_name.github.com项目仓库
+
+2） 安装rvm，安装ruby 1.9.2
+
+3） 安装bundler
+
+### 安装octopress
+
+Octopress的安装不是很复杂，顺次执行下面的操作：
+```bash
+git clone git://github.com/imathis/octopress.git octopress	# 克隆octopress至本地
+cd octopress    # 询问是否使用rvm 1.9.2
+bundle install  # 安装依赖的gems
+rake install    # 安装octopress
+```
+
+
+### 配置github page
+
+```bash
+rake setup_github_pages
+```
+执行后要求提供仓库地址，格式为：git@github.com:your_name/your_name.github.com.git
+接下来执行
+```bash
+rake generate
+rake deploy
+```
+收到成功消息后可以打开http://your_name.github.com访问博客。
+
+[Octopress官方文档][5]介绍了[如何将octopress部署到Heroku或Rsync][6]
+
+[5]:http://octopress.org/docs
+[6]:http://octopress.org/docs/deploying/
+
+### 将source加入git
+
+将source分支加入git可以保存整个项目源代码（配置、markdown文件等）。
+```bash
+git add .
+git commit -m 'initial source commit'
+git push origin source
+```
+
+### 更新octopress
+
+如果octopress发布了新版本，则可通过下面的方法来更新：
+```bash
+git pull octopress master   # 更新octopress至最新版本
+bundle install              # 更新octopuses使用的gems
+rake update_source          # 更新source
+rake update_style           # 更新样式
+```
+
+设置
+----
+
+Octopress的设置通过修改 _config.yml实现，注意冒号后面必须要加一个空格。
+
+1）一般设置
+```yaml _config.yml
+url: http://your_name.github.com        # 博客地址
+title: Your name                        # 博客名称，主标题
+subtitle:                               # 副标题
+author:                                 # 每篇文章的作者
+simple_search: http://google.com/search # 右边搜索框使用的搜索引擎
+description:                            # 描述
+```
+
+2）Jekyll及plugins
+```yaml _config.yml
+paginate: 10                    # 每页的文章数量，超过翻页
+recent_posts: 5                 # 右侧“最近发表”的模块里显示的文章数量
+excerpt_link: "Read on &rarr;"  # 在文章中使用<!-- more -->,列表页将不再显示全文，而是显示“Read on”的链接，指向全文
+default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.html]         # 用于配置侧边栏
+```
+
+3）更多设置
+
+* 在文中加入\<!--more-->来控制摘要截取位置
+* 修改_config.yml里的excerpt_link控制链接文字
+
+发布
+----
+
+1）使用命令产生新文章
+```bash
+rake new_post["Post Title"]
+```
+将在source/_posts目录下生成timestamp-Post-Title.markdown文件，并生成文章模板。
+
+2）预览
+
+* 使用
+```bash
+rake preview
+```
+启动本地sinatra服务，用浏览器打开http://127.0.0.1:4000可以预览。
+* 如果安装了[pow][7]，则可以设置pow
+```bash
+cd ~/.pow
+ln -s /path/to/octopress octopress
+cd -
+```
+然后通过
+```bash
+rake watch
+```
+来监控source和sass目录的变动，浏览器打开http://octopress.dev可随时看到最新的效果
+
+[7]:pow.cx
+
+3）发布
+
+```bash
+rake generate
+rake deploy
+```
+
+
+主题
+----
+
+1） [找到喜欢的octopress主题][8]
+
+2） 将主题克隆到本地.themes目录中：
+```bash
+git clone GIT_URL .themes/THEME_NAME
+```
+3） 安装主题
+```bash
+rake install['THEME_NAME']
+```
+4） 让主题生效
+```bash
+rake generate
+```
+
+[8]:https://github.com/imathis/octopress/wiki/List-Of-Octopress-Themes
+
+中文问题
+----
+
+### 代码块或代码块之前有utf-8字符，执行rake generate报错
+
+[Octopass issue 232][9]给出解决方法如下：
+
+1. 确保post的文件格式为utf-8
+2. 修改/path/to/gems/jekyll-0.11.2/lib/jekyll/convertible.rb，将第29行
+```ruby convertible.rb
+self.content = File.read(File.join(base, name))
+```
+改为：
+```ruby convertible.rb
+self.content = File.read(File.join(base, name), :encoding => "utf-8")
+```
+### 代码块中包含utf-8字符，pygments抛出错误，导致rake generate失败
+
+将/path/to/octopress/plugins/pygments_code.rb 文件第14行修改为：
+```ruby pygments_code.rb
+str = pygments(str, lang).force_encoding("UTF-8").match(/<pre>(.+)<\/pre>/m)[1].to_s.gsub(/ *$/, '') #strip out divs <div class="highlight">
+```
+
+[9]:https://github.com/imathis/octopress/issues/232
+
+添加边栏
+----
+
+### 添加Flickr边栏
+
+1） 在/source/_includes/custom/asides/ 目录下添加flickr.html文件
+``` js flickr.html
+{% if site.flickr_user %}
+<section class="flickr">
+<h1>My Flickr</h1>
+<!-- Start of Flickr Badge -->
+<style type="text/css">
+/*
+Images are wrapped in divs classed "flickr_badge_image" with ids "flickr_badge_imageX" where "X" is an integer specifying ordinal position. Below are some styles to get you started!
+*/
+#flickr_badge_wrapper {padding:10px 0 10px 0;}
+.flickr_badge_image {margin: 0 9px 8px 0px;display: inline-block;}
+</style>
+<div id="flickr_badge_uber_wrapper"><div id="flickr_badge_wrapper">
+<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count={{ site.flickr_count }}&display=latest&size=s&layout=x&source=user&user={{ site.flickr_user }}"></script>
+</div></div>
+<!-- End of Flickr Badge -->
+</section>
+{% endif %}
+```
+
+2） 在_config.yml中添加：
+``` yaml _config.yml
+# Flick Badges
+# Find your user id here: http://idgettr.com/ It should be something like "25711589%40N00".
+flickr_user: <your_flickr_user_id>
+flickr_count: 6
+```
+
+3） 在_config.yml的default_asides中添加custom/asides/flickr.html
+
+### 添加“关于我”
+
+1）在source下建立about目录，并添加index.markdown文件
+
+2）编辑导航条 source/_includes/custom/navigation.html
