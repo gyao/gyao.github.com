@@ -31,7 +31,7 @@ A：理由很多，列出几个吸引我的：
 * 内置代码高亮，各类真伪程序员的福音
 * 可定制程度较Jekyll强
 
-[3]:pages.github.com
+[3]:http://pages.github.com
 
 <!--more-->
 
@@ -138,6 +138,7 @@ rake new_post["Post Title"]
 rake preview
 ```
 启动本地sinatra服务，用浏览器打开http://127.0.0.1:4000可以预览。
+
 * 如果安装了[pow][7]，则可以设置pow
 ```bash
 cd ~/.pow
@@ -150,7 +151,7 @@ rake watch
 ```
 来监控source和sass目录的变动，浏览器打开http://octopress.dev可随时看到最新的效果
 
-[7]:pow.cx
+[7]:http://pow.cx
 
 3）发布
 
