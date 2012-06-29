@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | gyao's bloging]]></title>
   <link href="http://gyao.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://gyao.github.com/"/>
-  <updated>2012-06-29T09:17:52+08:00</updated>
+  <updated>2012-06-29T14:14:56+08:00</updated>
   <id>http://gyao.github.com/</id>
   <author>
     <name><![CDATA[gyao]]></name>
@@ -212,6 +212,26 @@ str = pygments(str, lang).force_encoding("UTF-8").match(/&lt;pre&gt;(.+)&lt;\/pr
 
 <p>1） 在/source/_includes/custom/asides/ 目录下添加flickr.html文件
 ``` js flickr.html
+
+<section class="flickr"></p>
+
+<h1>My Flickr</h1>
+
+
+<!-- Start of Flickr Badge -->
+
+
+
+
+<div id="flickr_badge_uber_wrapper"><div id="flickr_badge_wrapper">
+<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&display=latest&size=s&layout=x&source=user&user=68540197@N06"></script>
+</div></div>
+
+
+<!-- End of Flickr Badge -->
+
+
+<p></section>
 
 ```</p>
 
