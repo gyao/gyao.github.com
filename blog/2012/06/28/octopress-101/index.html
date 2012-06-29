@@ -9,8 +9,7 @@
   <meta name="author" content="gyao">
 
   
-  <meta name="description" content="酝酿了一段时间“感情”，终于有了要写东西的冲动，花了点时间用octopress搭建了自己的博客，此文是为记录。 选择 Q：为什么要用octopress？ A：理由很多，列出几个吸引我的： “像黑客一样写博客”：真伪geek读到此处就失去了免疫力
-用markdown写作 &hellip;">
+  <meta name="description" content="酝酿了一段时间感情，终于有了要写东西的冲动，花了点时间用octopress搭建了自己的博客，此文是为记录。 Octopress前世 Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,7 +90,11 @@
   </header>
 
 
-<div class="entry-content"><p>酝酿了一段时间“感情”，终于有了要写东西的冲动，花了点时间用<a href="http://octopress.org/">octopress</a>搭建了自己的博客，此文是为记录。</p>
+<div class="entry-content"><p>酝酿了一段时间感情，终于有了要写东西的冲动，花了点时间用<a href="http://octopress.org/">octopress</a>搭建了自己的博客，此文是为记录。</p>
+
+<h2>Octopress前世</h2>
+
+<blockquote><p>Octopress is a framework designed by Brandon Mathis for <a href="https://github.com/mojombo/jekyll">Jekyll</a>, the blog aware static site generator powering Github Pages.</p></blockquote>
 
 <h2>选择</h2>
 
@@ -101,27 +104,131 @@
 
 <ul>
 <li>“像黑客一样写博客”：真伪geek读到此处就失去了免疫力</li>
-<li>用markdown写作</li>
-<li>用github对文章内容进行版本管理，也方便多人合作写作</li>
-<li>可发布到github pages上，免去自己搭建vps或选择博客服务提供商的麻烦</li>
+<li>支持markdown语法</li>
+<li>静态方式发布，可发布到<a href="http://pages.github.com">github pages</a>上，免去自己搭建vps或选择博客服务提供商的麻烦</li>
 <li>内置代码高亮，各类真伪程序员的福音</li>
-<li>可定制程度较Jekll强</li>
+<li>可定制程度较Jekyll强</li>
 </ul>
+
+
+<!--more-->
 
 
 <h2>安装</h2>
 
 <h3>准备</h3>
 
+<p>1） github账户，并创建your_name.github.com项目仓库</p>
+
+<p>2） 安装rvm，安装ruby 1.9.2</p>
+
+<p>3） 安装bundler</p>
+
 <h3>安装octopress</h3>
 
-<h3>配置github</h3>
+<p>Octopress的安装不是很复杂，顺次执行下面的操作：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git://github.com/imathis/octopress.git octopress   <span class="c"># 克隆octopress至本地</span>
+</span><span class='line'><span class="nb">cd </span>octopress    <span class="c"># 询问是否使用rvm 1.9.2</span>
+</span><span class='line'>bundle install  <span class="c"># 安装依赖的gems</span>
+</span><span class='line'>rake install    <span class="c"># 安装octopress</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>配置github page</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行后要求提供仓库地址，格式为：git@github.com:your_name/your_name.github.com.git
+接下来执行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+</span><span class='line'>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>收到成功消息后可以打开http://your_name.github.com访问博客。</p>
+
+<p><a href="http://octopress.org/docs">Octopress官方文档</a>介绍了<a href="http://octopress.org/docs/deploying/">如何将octopress部署到Heroku或Rsync</a></p>
 
 <h3>将source加入git</h3>
 
+<p>将source分支加入git可以保存整个项目源代码（配置、markdown文件等）。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s1">&#39;initial source commit&#39;</span>
+</span><span class='line'>git push origin <span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h3>更新octopress</h3>
 
+<p>如果octopress发布了新版本，则可通过下面的方法来更新：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git pull octopress master   <span class="c"># 更新octopress至最新版本</span>
+</span><span class='line'>bundle install              <span class="c"># 更新octopuses使用的gems</span>
+</span><span class='line'>rake update_source          <span class="c"># 更新source</span>
+</span><span class='line'>rake update_style           <span class="c"># 更新样式</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>设置</h2>
+
+<p>Octopress的设置通过修改 _config.yml实现，注意冒号后面必须要加一个空格。</p>
+
+<p>1）一般设置</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://your_name.github.com</span>        <span class="c1"># 博客地址</span>
+</span><span class='line'><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Your name</span>                        <span class="c1"># 博客名称，主标题</span>
+</span><span class='line'><span class="l-Scalar-Plain">subtitle</span><span class="p-Indicator">:</span>                               <span class="c1"># 副标题</span>
+</span><span class='line'><span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span>                                 <span class="c1"># 每篇文章的作者</span>
+</span><span class='line'><span class="l-Scalar-Plain">simple_search</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://google.com/search</span> <span class="c1"># 右边搜索框使用的搜索引擎</span>
+</span><span class='line'><span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span>                            <span class="c1"># 描述</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2）Jekyll及plugins</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">paginate</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">10</span>                    <span class="c1"># 每页的文章数量，超过翻页</span>
+</span><span class='line'><span class="l-Scalar-Plain">recent_posts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>                 <span class="c1"># 右侧“最近发表”的模块里显示的文章数量</span>
+</span><span class='line'><span class="l-Scalar-Plain">excerpt_link</span><span class="p-Indicator">:</span> <span class="s">&quot;Read</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">&amp;rarr;&quot;</span>  <span class="c1"># 在文章中使用&lt;!-- more --&gt;,列表页将不再显示全文，而是显示“Read on”的链接，指向全文</span>
+</span><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">asides/recent_posts.html</span><span class="p-Indicator">,</span> <span class="nv">asides/github.html</span><span class="p-Indicator">,</span> <span class="nv">asides/twitter.html</span><span class="p-Indicator">]</span>         <span class="c1"># 用于配置侧边栏</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3）更多设置</p>
+
+<ul>
+<li>在文中加入&lt;!&#8211;more&#8211;>来控制摘要截取位置</li>
+<li>修改_config.yml里的excerpt_link控制链接文字</li>
+</ul>
+
 
 <h2>发布</h2>
 
@@ -132,9 +239,53 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>将在source/_posts目录下生成timestamp-Post-Title.markdown文件，并生成文章模板。</p>
+
 <p>2）预览</p>
 
+<ul>
+<li>使用</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake preview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>启动本地sinatra服务，用浏览器打开http://127.0.0.1:4000可以预览。</p>
+
+<ul>
+<li>如果安装了<a href="http://pow.cx">pow</a>，则可以设置pow</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ~/.pow
+</span><span class='line'>ln -s /path/to/octopress octopress
+</span><span class='line'><span class="nb">cd</span> -
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后通过</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake watch
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>来监控source和sass目录的变动，浏览器打开http://octopress.dev可随时看到最新的效果</p>
+
 <p>3）发布</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+</span><span class='line'>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>主题</h2>
 
@@ -163,11 +314,13 @@
 
 <h2>中文问题</h2>
 
-<p>老生常谈的问题，如果代码块，或代码块之前有utf-8字符（如中文），则执行rake generate时会发生错误。<a href="https://github.com/imathis/octopress/issues/232">Octopass issue 232</a>给出解决方法如下：</p>
+<h3>代码块或代码块之前有utf-8字符，执行rake generate报错</h3>
+
+<p><a href="https://github.com/imathis/octopress/issues/232">Octopass issue 232</a>给出解决方法如下：</p>
 
 <ol>
 <li>确保post的文件格式为utf-8</li>
-<li>修改/path/to/gems/jekll-0.11.2/lib/jekll/convertible.rb，将第29行</li>
+<li>修改/path/to/gems/jekyll-0.11.2/lib/jekyll/convertible.rb，将第29行</li>
 </ol>
 
 
@@ -180,6 +333,15 @@
 
 <figure class='code'><figcaption><span>convertible.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">name</span><span class="p">),</span> <span class="ss">:encoding</span> <span class="o">=&gt;</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>代码块中包含utf-8字符，pygments抛出错误，导致rake generate失败</h3>
+
+<p>将/path/to/octopress/plugins/pygments_code.rb 文件第14行修改为：</p>
+
+<figure class='code'><figcaption><span>pygments_code.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">str</span> <span class="o">=</span> <span class="n">pygments</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">lang</span><span class="p">)</span><span class="o">.</span><span class="n">force_encoding</span><span class="p">(</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/&lt;pre&gt;(.+)&lt;\/pre&gt;/m</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">to_s</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/ *$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1">#strip out divs &lt;div class=&quot;highlight&quot;&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -240,6 +402,12 @@
 
 
 <p>3） 在_config.yml的default_asides中添加custom/asides/flickr.html</p>
+
+<h3>添加“关于我”</h3>
+
+<p>1）在source下建立about目录，并添加index.markdown文件</p>
+
+<p>2）编辑导航条 source/_includes/custom/navigation.html</p>
 </div>
 
 
@@ -267,7 +435,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopass/'>octopass</a>
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
   
 </span>
 
@@ -306,10 +474,6 @@
     
       <li class="post">
         <a href="/blog/2012/06/28/setup-rails-environment-on-mac-lion/">Setup rails environment on Mac Lion</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/28/hello-octopass/">Hello Octopass</a>
       </li>
     
   </ul>

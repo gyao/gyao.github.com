@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | gyao's bloging]]></title>
+  <link href="http://gyao.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://gyao.github.com/"/>
+  <updated>2012-06-29T01:00:32+08:00</updated>
+  <id>http://gyao.github.com/</id>
+  <author>
+    <name><![CDATA[gyao]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 101]]></title>
+    <link href="http://gyao.github.com/blog/2012/06/28/octopress-101/"/>
+    <updated>2012-06-28T17:21:00+08:00</updated>
+    <id>http://gyao.github.com/blog/2012/06/28/octopress-101</id>
+    <content type="html"><![CDATA[<p>酝酿了一段时间感情，终于有了要写东西的冲动，花了点时间用<a href="http://octopress.org/">octopress</a>搭建了自己的博客，此文是为记录。</p>
+
+<h2>Octopress前世</h2>
+
+<blockquote><p>Octopress is a framework designed by Brandon Mathis for <a href="https://github.com/mojombo/jekyll">Jekyll</a>, the blog aware static site generator powering Github Pages.</p></blockquote>
+
+<h2>选择</h2>
+
+<p>Q：为什么要用octopress？</p>
+
+<p>A：理由很多，列出几个吸引我的：</p>
+
+<ul>
+<li>“像黑客一样写博客”：真伪geek读到此处就失去了免疫力</li>
+<li>支持markdown语法</li>
+<li>静态方式发布，可发布到<a href="http://pages.github.com">github pages</a>上，免去自己搭建vps或选择博客服务提供商的麻烦</li>
+<li>内置代码高亮，各类真伪程序员的福音</li>
+<li>可定制程度较Jekyll强</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2>安装</h2>
+
+<h3>准备</h3>
+
+<p>1） github账户，并创建your_name.github.com项目仓库</p>
+
+<p>2） 安装rvm，安装ruby 1.9.2</p>
+
+<p>3） 安装bundler</p>
+
+<h3>安装octopress</h3>
+
+<p>Octopress的安装不是很复杂，顺次执行下面的操作：
+<code>bash
+git clone git://github.com/imathis/octopress.git octopress  # 克隆octopress至本地
+cd octopress    # 询问是否使用rvm 1.9.2
+bundle install  # 安装依赖的gems
+rake install    # 安装octopress
+</code></p>
+
+<h3>配置github page</h3>
+
+<p><code>bash
+rake setup_github_pages
+</code>
+执行后要求提供仓库地址，格式为：git@github.com:your_name/your_name.github.com.git
+接下来执行
+<code>bash
+rake generate
+rake deploy
+</code>
+收到成功消息后可以打开http://your_name.github.com访问博客。</p>
+
+<p><a href="http://octopress.org/docs">Octopress官方文档</a>介绍了<a href="http://octopress.org/docs/deploying/">如何将octopress部署到Heroku或Rsync</a></p>
+
+<h3>将source加入git</h3>
+
+<p>将source分支加入git可以保存整个项目源代码（配置、markdown文件等）。
+<code>bash
+git add .
+git commit -m 'initial source commit'
+git push origin source
+</code></p>
+
+<h3>更新octopress</h3>
+
+<p>如果octopress发布了新版本，则可通过下面的方法来更新：
+<code>bash
+git pull octopress master   # 更新octopress至最新版本
+bundle install              # 更新octopuses使用的gems
+rake update_source          # 更新source
+rake update_style           # 更新样式
+</code></p>
+
+<h2>设置</h2>
+
+<p>Octopress的设置通过修改 _config.yml实现，注意冒号后面必须要加一个空格。</p>
+
+<p>1）一般设置
+<code>yaml _config.yml
+url: http://your_name.github.com        # 博客地址
+title: Your name                        # 博客名称，主标题
+subtitle:                               # 副标题
+author:                                 # 每篇文章的作者
+simple_search: http://google.com/search # 右边搜索框使用的搜索引擎
+description:                            # 描述
+</code></p>
+
+<p>2）Jekyll及plugins
+<code>yaml _config.yml
+paginate: 10                    # 每页的文章数量，超过翻页
+recent_posts: 5                 # 右侧“最近发表”的模块里显示的文章数量
+excerpt_link: "Read on &amp;rarr;"  # 在文章中使用&lt;!-- more --&gt;,列表页将不再显示全文，而是显示“Read on”的链接，指向全文
+default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.html]         # 用于配置侧边栏
+</code></p>
+
+<p>3）更多设置</p>
+
+<ul>
+<li>在文中加入&lt;!--more-->来控制摘要截取位置</li>
+<li>修改_config.yml里的excerpt_link控制链接文字</li>
+</ul>
+
+
+<h2>发布</h2>
+
+<p>1）使用命令产生新文章
+<code>bash
+rake new_post["Post Title"]
+</code>
+将在source/_posts目录下生成timestamp-Post-Title.markdown文件，并生成文章模板。</p>
+
+<p>2）预览</p>
+
+<ul>
+<li><p>使用
+<code>bash
+rake preview
+</code>
+启动本地sinatra服务，用浏览器打开http://127.0.0.1:4000可以预览。</p></li>
+<li><p>如果安装了<a href="http://pow.cx">pow</a>，则可以设置pow
+<code>bash
+cd ~/.pow
+ln -s /path/to/octopress octopress
+cd -
+</code>
+然后通过
+<code>bash
+rake watch
+</code>
+来监控source和sass目录的变动，浏览器打开http://octopress.dev可随时看到最新的效果</p></li>
+</ul>
+
+
+<p>3）发布</p>
+
+<p><code>bash
+rake generate
+rake deploy
+</code></p>
+
+<h2>主题</h2>
+
+<p>1） <a href="https://github.com/imathis/octopress/wiki/List-Of-Octopress-Themes">找到喜欢的octopress主题</a></p>
+
+<p>2） 将主题克隆到本地.themes目录中：
+<code>bash
+git clone GIT_URL .themes/THEME_NAME
+</code>
+3） 安装主题
+<code>bash
+rake install['THEME_NAME']
+</code>
+4） 让主题生效
+<code>bash
+rake generate
+</code></p>
+
+<h2>中文问题</h2>
+
+<h3>代码块或代码块之前有utf-8字符，执行rake generate报错</h3>
+
+<p><a href="https://github.com/imathis/octopress/issues/232">Octopass issue 232</a>给出解决方法如下：</p>
+
+<ol>
+<li>确保post的文件格式为utf-8</li>
+<li>修改/path/to/gems/jekyll-0.11.2/lib/jekyll/convertible.rb，将第29行
+<code>ruby convertible.rb
+self.content = File.read(File.join(base, name))
+</code>
+改为：
+<code>ruby convertible.rb
+self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
+</code>
+
+<h3>代码块中包含utf-8字符，pygments抛出错误，导致rake generate失败</h3></li>
+</ol>
+
+
+<p>将/path/to/octopress/plugins/pygments_code.rb 文件第14行修改为：
+<code>ruby pygments_code.rb
+str = pygments(str, lang).force_encoding("UTF-8").match(/&lt;pre&gt;(.+)&lt;\/pre&gt;/m)[1].to_s.gsub(/ *$/, '') #strip out divs &lt;div class="highlight"&gt;
+</code></p>
+
+<h2>添加边栏</h2>
+
+<h3>添加Flickr边栏</h3>
+
+<p>1） 在/source/_includes/custom/asides/ 目录下添加flickr.html文件
+``` js flickr.html
+
+```</p>
+
+<p>2） 在<em>config.yml中添加：
+``` yaml </em>config.yml</p>
+
+<h1>Flick Badges</h1>
+
+<h1>Find your user id here: http://idgettr.com/ It should be something like "25711589%40N00".</h1>
+
+<p>flickr_user: <your_flickr_user_id>
+flickr_count: 6
+```</p>
+
+<p>3） 在_config.yml的default_asides中添加custom/asides/flickr.html</p>
+
+<h3>添加“关于我”</h3>
+
+<p>1）在source下建立about目录，并添加index.markdown文件</p>
+
+<p>2）编辑导航条 source/_includes/custom/navigation.html</p>
+]]></content>
+  </entry>
+  
+</feed>
