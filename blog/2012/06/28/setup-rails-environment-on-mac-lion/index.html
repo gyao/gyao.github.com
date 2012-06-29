@@ -9,8 +9,9 @@
   <meta name="author" content="gyao">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="This post logs the &#8220;best practice&#8221; of setup rails development environment. Prepare Install XCode
+Install osx-gcc-installer
+Install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -119,7 +120,150 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p>This post logs the &#8220;best practice&#8221; of setup rails development environment.</p>
+
+<!--more-->
+
+
+<h2>Prepare </h2>
+
+<ul>
+<li>Install <a href="http://itunes.apple.com/us/app/xcode/id448457090?mt=12">XCode</a></li>
+<li>Install <a href="https://github.com/kennethreitz/osx-gcc-installer">osx-gcc-installer</a></li>
+<li>Install <a href="http://github.com/mxcl/homebrew">homebrew</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -e <span class="s2">&quot;$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install MySQL</h2>
+
+<ul>
+<li>Download <a href="http://www.mysql.com/downloads/mysql/">MySQL</a></li>
+<li>Install
+
+<ul>
+<li>mysql-5.5.20-osx10.6-x86_64.pkg for MySQL installation</li>
+<li>MySQL.prefPane to install MySQL panel on System Preference</li>
+<li>MySQLStartupItem.pkg to start up MySQL when system boot</li>
+</ul>
+</li>
+<li>Start / stop MySQL service through MySQL panel on System Preference</li>
+<li>Install <a href="http://www.sequelpro.com/">Sequel Pro</a> as MySQL GUI</li>
+</ul>
+
+
+<h2>Install imagemagick</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install imagemagick
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install rvm</h2>
+
+<p>rvm is a ruby version management tool to allow install and switch multiple versions of ruby interpreter.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt;&lt;<span class="o">(</span> curl http://rvm.beginrescueend.com/releases/rvm-install-head <span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit profile, add following line at the bottom of ~/.zshrc</p>
+
+<figure class='code'><figcaption><span>~/.zshrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span> -s <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Activate profile</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> ~/.zshrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install ree</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm install ree --force
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Switch ruby interpreter to ree</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm ree --default
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install Essential gems</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install rails
+</span><span class='line'>gem install rails -v<span class="o">=</span>3.0.7
+</span><span class='line'>gem install mysql2
+</span><span class='line'>gem install passenger
+</span><span class='line'>gem install nokogiri
+</span><span class='line'>gem install capistrano
+</span><span class='line'>gem install capistrano-ext
+</span><span class='line'>gem install delayed_job
+</span><span class='line'>gem install hoptoad_notifier
+</span><span class='line'>gem install facebooker2
+</span><span class='line'>gem install factory_girl
+</span><span class='line'>gem install sphinx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install Pow as HTTP Server</h2>
+
+<p>Pow is a zero configure http server.</p>
+
+<p>Installation</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl get.pow.cx | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Setup, well, I&#8217;m lying before…</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ~/.pow/
+</span><span class='line'>ln -s ~/dir/to/your/rails/project
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Project settings for pow</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /dir/to/your/rails/project
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;rvm your_ruby_interpreter&quot;</span> &gt; .rvmrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Resolve mysql2 Adapter Issue Under rvm</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo install_name_tool -change libmysqlclient.18.dylib /usr/local/mysql/lib/libmysqlclient.18.dylib ~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/gems/1.9.1/gems/mysql2-0.3.11/lib/mysql2/mysql2.bundle
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
