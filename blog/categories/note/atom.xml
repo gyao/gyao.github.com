@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: note | gyao's bloging]]></title>
+  <link href="http://gyao.github.com/blog/categories/note/atom.xml" rel="self"/>
+  <link href="http://gyao.github.com/"/>
+  <updated>2012-07-06T16:34:43+08:00</updated>
+  <id>http://gyao.github.com/</id>
+  <author>
+    <name><![CDATA[gyao]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap Mac]]></title>
+    <link href="http://gyao.github.com/blog/2012/07/06/bootstrap-mac/"/>
+    <updated>2012-07-06T15:06:00+08:00</updated>
+    <id>http://gyao.github.com/blog/2012/07/06/bootstrap-mac</id>
+    <content type="html"><![CDATA[<p>This post is an instruction of how to setup development environment on a Mac, including:</p>
+
+<ol>
+<li>Basic development environment setup</li>
+<li>Ruby / Rails environment setup</li>
+</ol>
+
+
+<p>Also provides a easy way to bootstrap (NOTE: need network connection to run the script):</p>
+
+<p><code>bash
+bash &lt; &lt;(curl -s https://raw.github.com/gyao/bootstrap-mac/master/mac)
+bash &lt; &lt;(curl -s https://raw.github.com/gyao/bootstrap-mac/master/ruby)
+</code></p>
+
+<!-- more -->
+
+
+<h2>Basic Development Environment Setup</h2>
+
+<h3>1. Install Xcode and install <a href="https://developer.apple.com/downloads/index.action">Command Line Tools for XCode</a></h3>
+
+<h3>2. Generate SSH key pairs</h3>
+
+<p><code>bash
+cd
+mkdir .ssh
+cd .ssh
+ssh-keygen -t rsa
+</code></p>
+
+<h3>3. Install <a href="http://mxcl.github.com/homebrew/">homebrew</a></h3>
+
+<p><code>bash
+/usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
+brew update
+</code></p>
+
+<h3>4. Install <a href="www.zsh.org">zsh</a> and <a href="https://github.com/robbyrussell/oh-my-zsh/">oh-my-zsh</a></h3>
+
+<p><code>bash
+brew install zsh
+wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+</code></p>
+
+<h3>5. Install <a href="http://betterthangrep.com/">ack</a></h3>
+
+<p><code>bash
+brew install ack
+</code></p>
+
+<h3>6. MacVim</h3>
+
+<p><code>bash
+brew install macvim
+curl https://raw.github.com/carlhuda/janus/master/bootstrap.sh -o - | sh
+</code></p>
+
+<h3>7. <a href="tmux.sourceforge.net">tmux</a></h3>
+
+<p><code>bash
+brew install tmux
+</code></p>
+
+<p>Or use following script to bootstrap</p>
+
+<p><code>bash
+bash &lt; &lt;(curl -s https://raw.github.com/gyao/bootstrap-mac/master/mac)
+</code></p>
+
+<h2>Ruby / Rails Environment Setup</h2>
+
+<p>Please refer to <a href="/blog/2012/06/28/setup-rails-environment-on-mac-lion">another post of mine</a></p>
+
+<p>Also you could use following script to bootstrap ruby and rails development environment, after you installed MySQL.</p>
+
+<p><code>bash
+bash &lt; &lt;(curl -s https://raw.github.com/gyao/bootstrap-mac/master/ruby)
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

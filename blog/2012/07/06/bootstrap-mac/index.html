@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Setup rails environment on Mac Lion - gyao's bloging</title>
+  <title>Bootstrap Mac - gyao's bloging</title>
   <meta name="author" content="gyao">
 
   
-  <meta name="description" content="This post logs the &#8220;best practice&#8221; of setup rails development environment. Prepare Install XCode
-Install osx-gcc-installer
-Install &hellip;">
+  <meta name="description" content="This post is an instruction of how to setup development environment on a Mac, including: Basic development environment setup
+Ruby / Rails environment &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ Install &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gyao.github.com/blog/2012/06/28/setup-rails-environment-on-mac-lion">
+  <link rel="canonical" href="http://gyao.github.com/blog/2012/07/06/bootstrap-mac">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -97,7 +96,7 @@ Install &hellip;">
   
   <header class="page-header">
     
-      <h1 class="entry-title">Setup Rails Environment on Mac Lion</h1>
+      <h1 class="entry-title">Bootstrap Mac</h1>
     
     
       <p class="meta">
@@ -113,156 +112,111 @@ Install &hellip;">
   
 
 
-<time datetime="2012-06-28T16:25:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2012</time>
+<time datetime="2012-07-06T15:06:00+08:00" pubdate data-updated="true">Jul 6<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>This post logs the &#8220;best practice&#8221; of setup rails development environment.</p>
+<div class="entry-content"><p>This post is an instruction of how to setup development environment on a Mac, including:</p>
 
-<!--more-->
+<ol>
+<li>Basic development environment setup</li>
+<li>Ruby / Rails environment setup</li>
+</ol>
 
 
-<h2>Prepare </h2>
-
-<ul>
-<li>Install <a href="http://itunes.apple.com/us/app/xcode/id448457090?mt=12">XCode</a></li>
-<li>Install <a href="https://github.com/kennethreitz/osx-gcc-installer">osx-gcc-installer</a></li>
-<li>Install <a href="http://github.com/mxcl/homebrew">homebrew</a></li>
-</ul>
-
+<p>Also provides a easy way to bootstrap (NOTE: need network connection to run the script):</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -e <span class="s2">&quot;$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)&quot;</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/mac<span class="o">)</span>
+</span><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/ruby<span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Install MySQL</h2>
-
-<ul>
-<li>Download <a href="http://www.mysql.com/downloads/mysql/">MySQL</a></li>
-<li>Install
-
-<ul>
-<li>mysql-5.5.20-osx10.6-x86_64.pkg for MySQL installation</li>
-<li>MySQL.prefPane to install MySQL panel on System Preference</li>
-<li>MySQLStartupItem.pkg to start up MySQL when system boot</li>
-</ul>
-</li>
-<li>Start / stop MySQL service through MySQL panel on System Preference</li>
-<li>Install <a href="http://www.sequelpro.com/">Sequel Pro</a> as MySQL GUI</li>
-</ul>
 
 
-<h2>Install imagemagick</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install imagemagick
-</span></code></pre></td></tr></table></div></figure>
+<!-- more -->
 
 
-<h2>Install rvm</h2>
+<h2>Basic Development Environment Setup</h2>
 
-<p>rvm is a ruby version management tool to allow install and switch multiple versions of ruby interpreter.</p>
+<h3>1. Install Xcode and install <a href="https://developer.apple.com/downloads/index.action">Command Line Tools for XCode</a></h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt;&lt;<span class="o">(</span> curl http://rvm.beginrescueend.com/releases/rvm-install-head <span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit profile, add following line at the bottom of ~/.zshrc</p>
-
-<figure class='code'><figcaption><span>~/.zshrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span> -s <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Activate profile</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> ~/.zshrc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Install ree</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm install ree --force
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Switch ruby interpreter to ree</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm ree --default
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Install Essential gems</h2>
+<h3>2. Generate SSH key pairs</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install rails
-</span><span class='line'>gem install rails -v<span class="o">=</span>3.0.7
-</span><span class='line'>gem install mysql2
-</span><span class='line'>gem install passenger
-</span><span class='line'>gem install nokogiri
-</span><span class='line'>gem install capistrano
-</span><span class='line'>gem install capistrano-ext
-</span><span class='line'>gem install delayed_job
-</span><span class='line'>gem install hoptoad_notifier
-</span><span class='line'>gem install facebooker2
-</span><span class='line'>gem install factory_girl
-</span><span class='line'>gem install sphinx
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>
+</span><span class='line'>mkdir .ssh
+</span><span class='line'><span class="nb">cd</span> .ssh
+</span><span class='line'>ssh-keygen -t rsa
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Install Pow as HTTP Server</h2>
-
-<p>Pow is a zero configure http server.</p>
-
-<p>Installation</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl get.pow.cx | sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Setup, well, I&#8217;m lying before…</p>
+<h3>3. Install <a href="http://mxcl.github.com/homebrew/">homebrew</a></h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ~/.pow/
-</span><span class='line'>ln -s ~/dir/to/your/rails/project
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/bin/ruby -e <span class="s2">&quot;$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)&quot;</span>
+</span><span class='line'>brew update
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Project settings for pow</p>
+<h3>4. Install <a href="www.zsh.org">zsh</a> and <a href="https://github.com/robbyrussell/oh-my-zsh/">oh-my-zsh</a></h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /dir/to/your/rails/project
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;rvm your_ruby_interpreter&quot;</span> &gt; .rvmrc
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install zsh
+</span><span class='line'>wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Resolve mysql2 Adapter Issue Under rvm</h2>
+<h3>5. Install <a href="http://betterthangrep.com/">ack</a></h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo install_name_tool -change libmysqlclient.18.dylib /usr/local/mysql/lib/libmysqlclient.18.dylib ~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/gems/1.9.1/gems/mysql2-0.3.11/lib/mysql2/mysql2.bundle
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install ack
 </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>6. MacVim</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install macvim
+</span><span class='line'>curl https://raw.github.com/carlhuda/janus/master/bootstrap.sh -o - | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>7. <a href="tmux.sourceforge.net">tmux</a></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or use following script to bootstrap</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/mac<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ruby / Rails Environment Setup</h2>
+
+<p>Please refer to <a href="/blog/2012/06/28/setup-rails-environment-on-mac-lion">another post of mine</a></p>
+
+<p>Also you could use following script to bootstrap ruby and rails development environment, after you installed MySQL.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/ruby<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 </div>
 
@@ -286,15 +240,21 @@ Install &hellip;">
   
 
 
-<time datetime="2012-06-28T16:25:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2012</time>
+<time datetime="2012-07-06T15:06:00+08:00" pubdate data-updated="true">Jul 6<span>th</span>, 2012</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mac-/'>mac,</a>, <a class='category' href='/blog/categories/note/'>note</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gyao.github.com/blog/2012/06/28/setup-rails-environment-on-mac-lion/" data-via="jqyao" data-counturl="http://gyao.github.com/blog/2012/06/28/setup-rails-environment-on-mac-lion/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gyao.github.com/blog/2012/07/06/bootstrap-mac/" data-via="jqyao" data-counturl="http://gyao.github.com/blog/2012/07/06/bootstrap-mac/" >Tweet</a>
   
   
   
@@ -304,11 +264,11 @@ Install &hellip;">
     
     <ul class="pager">
       
-      <li><a href="/blog/archives">Blog Archives</a></li>
+      <li class="previous"><a class="basic-alignment left"
+        href="/blog/2012/06/28/octopress-101/" title="Previous Post:
+        Octopress 101">&laquo; Octopress 101</a></li>
       
-      <li class="next"><a class="basic-alignment right" href="/blog/2012/06/28/octopress-101/"
-        title="Next Post: Octopress 101">Octopress 101
-        &raquo;</a></li>
+      <li><a href="/blog/archives">Blog Archives</a></li>
       
     </ul>
   </footer>

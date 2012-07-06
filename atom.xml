@@ -4,7 +4,7 @@
   <title><![CDATA[gyao's bloging]]></title>
   <link href="http://gyao.github.com/atom.xml" rel="self"/>
   <link href="http://gyao.github.com/"/>
-  <updated>2012-06-29T17:23:38+08:00</updated>
+  <updated>2012-07-06T16:34:43+08:00</updated>
   <id>http://gyao.github.com/</id>
   <author>
     <name><![CDATA[gyao]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap Mac]]></title>
+    <link href="http://gyao.github.com/blog/2012/07/06/bootstrap-mac/"/>
+    <updated>2012-07-06T15:06:00+08:00</updated>
+    <id>http://gyao.github.com/blog/2012/07/06/bootstrap-mac</id>
+    <content type="html"><![CDATA[<p>This post is an instruction of how to setup development environment on a Mac, including:</p>
+
+<ol>
+<li>Basic development environment setup</li>
+<li>Ruby / Rails environment setup</li>
+</ol>
+
+
+<p>Also provides a easy way to bootstrap (NOTE: need network connection to run the script):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/mac<span class="o">)</span>
+</span><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/ruby<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>Basic Development Environment Setup</h2>
+
+<h3>1. Install Xcode and install <a href="https://developer.apple.com/downloads/index.action">Command Line Tools for XCode</a></h3>
+
+<h3>2. Generate SSH key pairs</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>
+</span><span class='line'>mkdir .ssh
+</span><span class='line'><span class="nb">cd</span> .ssh
+</span><span class='line'>ssh-keygen -t rsa
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3. Install <a href="http://mxcl.github.com/homebrew/">homebrew</a></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/bin/ruby -e <span class="s2">&quot;$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)&quot;</span>
+</span><span class='line'>brew update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>4. Install <a href="www.zsh.org">zsh</a> and <a href="https://github.com/robbyrussell/oh-my-zsh/">oh-my-zsh</a></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install zsh
+</span><span class='line'>wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>5. Install <a href="http://betterthangrep.com/">ack</a></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install ack
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>6. MacVim</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install macvim
+</span><span class='line'>curl https://raw.github.com/carlhuda/janus/master/bootstrap.sh -o - | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>7. <a href="tmux.sourceforge.net">tmux</a></h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or use following script to bootstrap</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/mac<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ruby / Rails Environment Setup</h2>
+
+<p>Please refer to <a href="http://gyao.github.com/blog/2012/06/28/setup-rails-environment-on-mac-lion">another post of mine</a></p>
+
+<p>Also you could use following script to bootstrap ruby and rails development environment, after you installed MySQL.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/gyao/bootstrap-mac/master/ruby<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 101]]></title>
